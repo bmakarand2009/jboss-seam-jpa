@@ -12,3 +12,5 @@ show databases;
 use test;
 show tables;
 desc <tablename>
+
+Persistence.xml now supports HSQL DB
