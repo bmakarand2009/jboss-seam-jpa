@@ -7,24 +7,57 @@
                 xmlns:rich="http://richfaces.org/rich"
 				template="template.xhtml">
 
-<!-- content -->
+<!-- content <s: validateAll > for validating field-->
 <ui:define name="content">
-<div class="section">
-	<h1>Book Meeting</h1>
-</div>
+  <h:form id="findMeetingForm">
+    <span class="errors">
+       <h:messages id="messages" globalOnly="true"/>
+    </span>
+    
+	<h1>Meetings</h1>
+	<fieldset> 
+	   <h:inputText id="searchMeeting" value="#{meetingListAction.meetingText}" style="width: 165px;">
+         <a:support id="onkeyup" event="onkeyup" actionListener="#{meetingListAction.findMeetings}" reRender="searchResults" />
+       </h:inputText>
+	   <a:commandButton id="findMeetings" value="Find Meetings" action="#{meetingListAction.findMeetings}" reRender="searchResults"/>
+	   <div class="notes"><s:link id="register" view="/meetingCreate.xhtml" value="Create Meeting"/></div>
+	   <a:status id="status">
+          <f:facet id="StartFacet" name="start">
+             <h:graphicImage id="SpinnerGif" value="/img/spinner.gif"/>
+          </f:facet>
+       </a:status>
+	   <br/>
+    </fieldset>
+  </h:form>    
+    
+    
+	<div class="section">
+		<h1>Current Meetings</h1>
+	</div>
+	<div class="section">
+	  <h:form id="meetings">
+		<h:outputText id="NoMeetingsFoundMessage" value="No Meetings Found" rendered="#{meetings.rowCount==0}"/>
+		<h:dataTable id="meetings" value="#{meetings}" var="aMeeting" rendered="#{meetings.rowCount>0}">
+			<h:column id="column1">
+				<f:facet id="IdFacet" name="header">Meeting Id</f:facet>
+				#{aMeeting.meetingId}
+			</h:column>
+			<h:column id="column2">
+				<f:facet id="dateFaced" name="header">Meeting DATE</f:facet>
+				#{aMeeting.meetingDate}
+			</h:column>
+			<h:column id="column3">
+				<f:facet id="costFaced" name="header">Meeting Cost</f:facet>
+				#{aMeeting.meetingCost}, #{aMeeting.meetingLocation}
+			</h:column>
+		</h:dataTable>
+	  </h:form>
+	  
+	</div>
+
 </ui:define>
 <!-- sidebar -->
 <ui:define name="sidebar">
 </ui:define>
-<div class="section">
-	<h:form id="booking">
-		<fieldset>
-			<div class="entry">
-				<div class="label">MeetingId:</div>
-				<div class="output">#{meeting.meetingId}</div>
-			</div>
-		</fieldset>
-	
-</h:form>
-</div>
+
 </ui:composition>

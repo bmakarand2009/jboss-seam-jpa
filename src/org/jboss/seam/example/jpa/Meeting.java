@@ -2,9 +2,11 @@ package org.jboss.seam.example.jpa;
 
 import static org.jboss.seam.ScopeType.SESSION;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.Length;
+import org.hibernate.validator.NotNull;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Scope;
 
@@ -24,14 +28,17 @@ import org.jboss.seam.annotations.Scope;
 public class Meeting {
 	@Id
 	@Column(name = "MEETING_ID", nullable = false, precision = 22, scale = 0)
-	private Long meetingId;
+	private String meetingId;
 	
-//	@Temporal(TemporalType.DATE)
-	@Column(name = "Date", length = 7)
-	private Date meetingDate;
+	 @Basic @Temporal(TemporalType.DATE)
+	 @NotNull
+	 private Date meetingDate;
 
-	@Column(name = "Location")
+	@Column
+	@NotNull
+	@Length(min=5, max=15)
 	private String meetingLocation;
+	
 	
 	@Column(name = "Agenda",length = 2000)
 	private String meetingAgenda;
@@ -39,6 +46,19 @@ public class Meeting {
 	@Column(name = "meetingNotes",length = 2000)
 	private String meetingNotes;
 	
+	@Column(name = "meetingCost",precision=6, scale=2)
+	private BigDecimal meetingCost;
+	
+	public BigDecimal getMeetingCost() {
+		return meetingCost;
+	}
+
+
+	public void setMeetingCost(BigDecimal meetingCost) {
+		this.meetingCost = meetingCost;
+	}
+
+
 	@Column(name = "meetingReason",length = 2000)
 	private String meetingReason;
 	
@@ -47,12 +67,12 @@ public class Meeting {
 	private Set<User> attendies;
 
 
-	public Long getMeetingId() {
+	public String getMeetingId() {
 		return meetingId;
 	}
 
 
-	public void setMeetingId(Long meetingId) {
+	public void setMeetingId(String meetingId) {
 		this.meetingId = meetingId;
 	}
 

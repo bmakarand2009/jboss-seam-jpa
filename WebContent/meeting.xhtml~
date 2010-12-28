@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+				template="template.xhtml">
+
+<!-- content -->
+<ui:define name="content">
+<div class="section">
+	<h1>Book Meeting</h1>
+</div>
+</ui:define>
+<!-- sidebar -->
+<ui:define name="sidebar">
+</ui:define>
+<div class="section">
+	<h:form id="booking">
+		<fieldset>
+			<div class="entry">
+				<div class="label">MeetingId:</div>
+				<div class="output">#{meeting.meetingId}</div>
+			</div>
+		</fieldset>
+	
+</h:form>
+</div>
+</ui:composition>

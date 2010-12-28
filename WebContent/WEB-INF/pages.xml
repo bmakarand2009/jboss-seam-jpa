@@ -86,6 +86,19 @@
         
     </page>
     
+    <page view-id="/meetingCreate.xhtml" 
+          conversation-required="false">
+          
+        <description>Create Meeting #{meeting.meetingId}</description>
+        
+        <navigation from-action="#{meetingCreateAction.createMeeting}">
+            <rule if="#{meetingCreateAction.created}">
+                <redirect view-id="/meeting.xhtml"/>
+            </rule>
+        </navigation>
+        
+    </page>
+    
     <page view-id="*">
     
         <navigation from-action="#{identity.logout}">

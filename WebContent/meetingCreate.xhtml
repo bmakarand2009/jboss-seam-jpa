@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	    		xmlns:ui="http://java.sun.com/jsf/facelets"
+	  			xmlns:h="http://java.sun.com/jsf/html"
+	  			xmlns:f="http://java.sun.com/jsf/core"
+	  			xmlns:s="http://jboss.com/products/seam/taglib"
+                xmlns:a="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+				template="template.xhtml">
+
+<!-- content <s: validateAll > for validating field-->
+<ui:define name="content">
+
+
+<div class="section">
+	<h1>Book Meeting</h1>
+	<rich:separator height="1"   lineType="solid" width="100%"/>
+	
+	<div class="section">
+<!--	<h:panelGrid columns="2" width="100%"-->
+<!--  			 columnClasses="form-column, table-column">-->
+	
+	<rich:panel>
+     <f:facet name="header">Create Meeting</f:facet>
+     <h:form id="createMeetingForm">
+<!--     <h:panelGrid columns="1">-->
+       <!-- fields -->
+		<s:validateAll >
+		<f:facet id="AroundInvalidFieldFacet" name="aroundInvalidField">
+             <s:span id="ErrorsSpan" styleClass="errors"/>
+         </f:facet>
+         <f:facet id="AfterInvalidFieldFacet" name="afterInvalidField">
+             <s:div id="ErrorsDiv" styleClass="errors">
+ 	               <s:message id="message"/>
+ 	           </s:div>
+         </f:facet>
+                       
+		<fieldset>		
+			<div class="entry">
+					<div class="label"><h:outputLabel id="meetingIdLbl" for="meetingId">Meeting Id:</h:outputLabel></div>
+					<div class="input">
+					       <s:decorate id="meetingIdDecorate">					
+							<h:inputText id="meetingId" value="#{meeting.meetingId}" required="true">
+							       <a:support id="onblur" event="onblur" reRender="meetingIdDecorate"/>
+                            </h:inputText>
+                           </s:decorate>
+					</div>
+			</div>
+			
+			<div class="entry">
+				<div class="label"><h:outputLabel id="meetingDateLbl" for="meetingDate">Meeting Date:</h:outputLabel></div>
+				<div class="input">
+                             <s:decorate id="meetingDateDecorate">
+								<rich:calendar id="meetingDate" value="#{meeting.meetingDate}" 
+									required="true" datePattern="MM/dd/yyyy" event="onblur" reRender="checkoutDateDecorate" style="width: auto;"/>
+							</s:decorate>
+                 </div>
+			</div>
+			<div class="entry">
+				<div class="label"><h:outputLabel id="meetingCostLbl" for="meetingCost">Meeting Cost($):</h:outputLabel></div>
+	            <div class="input">
+	                 <s:decorate id="meetingCostDecorate">					
+		                <h:inputText id="meetingCost" value="#{meeting.meetingCost}">
+		                    <a:support id="onblur" event="onblur" reRender="meetingCostDecorate"/>
+			             </h:inputText>
+		             </s:decorate>
+	            </div>
+            </div>
+			
+			<div class="entry">
+							<div class="label"><h:outputLabel id="meetingLocationLbl" for="meetingLocation">Meeting Location</h:outputLabel></div>
+							<div class="input">
+								<s:decorate id="meetingLocationDecorate">
+									<h:inputText id="meetingLocation" value="#{meeting.meetingLocation}" required="true">
+										<a:support id="onblur" event="onblur" reRender="meetingLocationDecorate"/>
+                                    </h:inputText>
+                                </s:decorate>
+							</div>
+			</div>
+			
+			<div class="entry">
+			
+			<div class="input">
+				<h:commandButton id="save" value="save" action="#{meetingCreateAction.createMeeting}"/>;
+				
+			</div>
+		</div>	
+		</fieldset>
+		</s:validateAll >
+
+<!--     </h:panelGrid>-->
+     </h:form>
+   </rich:panel>
+</div>
+</div>
+</ui:define>
+</ui:composition>
