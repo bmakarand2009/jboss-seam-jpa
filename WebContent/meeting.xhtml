@@ -37,20 +37,20 @@
 	<div class="section">
 	  <h:form id="meetings">
 		<h:outputText id="NoMeetingsFoundMessage" value="No Meetings Found" rendered="#{meetings.rowCount==0}"/>
-		<h:dataTable id="meetings" value="#{meetings}" var="aMeeting" rendered="#{meetings.rowCount>0}">
-			<h:column id="column1">
+		<rich:extendedDataTable id="meetings" value="#{meetings}" var="aMeeting" rendered="#{meetings.rowCount>0}">
+			<rich:column id="column1">
 				<f:facet id="IdFacet" name="header">Meeting Id</f:facet>
 				#{aMeeting.meetingId}
-			</h:column>
-			<h:column id="column2">
+			</rich:column>
+			<rich:column id="column2">
 				<f:facet id="dateFaced" name="header">Meeting DATE</f:facet>
 				#{aMeeting.meetingDate}
-			</h:column>
-			<h:column id="column3">
+			</rich:column>
+			<rich:column id="column3">
 				<f:facet id="costFaced" name="header">Meeting Cost</f:facet>
 				#{aMeeting.meetingCost}, #{aMeeting.meetingLocation}
-			</h:column>
-		</h:dataTable>
+			</rich:column>
+		</rich:extendedDataTable>
 	  </h:form>
 	  
 	</div>
